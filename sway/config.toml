@@ -1,0 +1,42 @@
+theme = "space-villain"
+icons = "awesome"
+
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mum}MB"
+
+[[block]]
+block = "cpu"
+interval = 1
+format = "{utilization} {frequency}"
+
+[[block]]
+block = "net"
+device = "enp6s0"
+format = "{speed_down} {speed_up}" 
+interval = 5
+use_bits = false
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "music"
+buttons = ["play", "next"]
+marquee_interval = 10
+interface_name_exclude = [".*kdeconnect.*", "mpd"]
+
+[[block]]
+block = "weather"
+format = "{weather} ({location}) {temp}°"
+interval = 600
+service = { name = "openweathermap", api_key = "f556c97ea3728de1995903bd4c342497", city_id = "3465927", units = "metric" }
+
+[[block]]
+block = "time"
+interval = 5
+format = "%a %d/%m %R"
+
+

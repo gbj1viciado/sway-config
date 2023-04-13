@@ -1,0 +1,280 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    //"gtk-layer-shell": true,
+    // "height": 28, // Waybar height (to be removed for auto height)
+    // "width": 1920, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["custom/rofi", "sway/mode", "wlr/workspaces"],
+    //"modules-center": ["sway/window"],
+    "modules-center": [""],
+    "modules-right": ["memory", "cpu", "custom/playerctl-title", "custom/playerctl-back", "custom/playerctl-stop", "custom/playerctl-pause", "custom/playerctl-play", "custom/playerctl-next", "pulseaudio", "network", "backlight", "custom/bat0", "custom/covid", "custom/whther", "clock", "tray", "custom/swaynotificationcencer", "custom/power"],
+    // Modules configuration
+    // "wlr/workspaces": {
+    //     "disable-scroll": false,
+    //     "all-outputs": true,
+    //     "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //     }
+    // },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+
+    },
+
+
+   "custom/whther": {
+     "format": "{}",
+     "format-alt": "{alt}",
+     "format-alt-click": "click-left",
+     "interval": 1800,
+     "return-type": "json",
+     "exec": "~/.config/waybar/wather/weather-waybar-module.sh",
+     "exec-if": "ping openweathermap.org -c1",
+     "signal": 8
+ 
+
+    },
+
+   "wlr/workspaces": {
+     "on-click": "activate",
+     "format": "{icon}",
+     "on-scroll-up": "hyprctl dispatch workspace e+1",
+     "on-scroll-down": "hyprctl dispatch workspace e-1"
+
+
+    },
+
+	"custom/playerctl-title": {
+        "max-length": 40,
+        "min-length": 20,
+        "format": "{}",
+        //"format-alt": "{alt}: {}",
+        //"format-alt-click": "click-left",       
+        "return-type": "bash",
+        "exec": "/home/gabriel/.config/waybar/player-spotify.sh",
+        "on-click-right": "pavucontrol",
+        "interval": 2,
+
+    },
+
+	"custom/swaynotificationcencer": {
+		"format": "",
+        "on-click": "swaync-client -t -sw",
+
+    },
+
+
+	"custom/playerctl-back": {
+		"format": "",
+        "on-click": "playerctl --player=spotify previous",
+        "on-click-right": "pavucontrol",
+
+    },
+
+	"custom/playerctl-next": {
+		"format": "",
+        "on-click": "playerctl --player=spotify next",
+        "on-click-right": "pavucontrol",
+
+    },
+
+	"custom/playerctl-stop": {
+		"format": "",
+        "on-click": "playerctl --player=spotify stop",
+        "on-click-right": "pavucontrol",
+
+    },
+
+	"custom/playerctl-pause": {
+		"format": "",
+        "on-click": "playerctl --player=spotify pause",
+        "on-click-right": "pavucontrol",
+
+    },
+
+	"custom/playerctl-play": {
+		"format": "",
+        "on-click": "playerctl --player=spotify play",
+        "on-click-right": "pavucontrol",
+
+    },
+
+	"custom/rofi": {
+		"format": "",
+        "on-click-right": "wofi --show=drun --lines=5 --prompt=",
+        "on-click": "nwg-drawer",
+        "on-click-middle": "pkill -9 wofi"
+
+    },
+
+	"custom/power": {
+		"format": "",
+        "on-click": "wlogout",
+
+    },
+
+    "mpd": {
+        "server": "127.0.0.1",
+        "port": 6600,
+        "tooltip": false,
+        "exec-if": "pgrep mpd",
+        //"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+//        "format-disconnected": "Disconnected ",
+//        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "format-disconnected": "",
+        "format-stopped": "",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "max-length": 60,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "on": "<span color=\"#f53c3c\"></span> ",
+            "off": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        }
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+
+    "clock": {
+        "timezone": "America/Sao_Paulo",
+        "format": "{:%H:%M %Z} ",
+        "format-alt": "{:%a, %b %d %C%y} ",
+        "tooltip": false,
+        "on-click-right": "gsimplecal"
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": "{usage}% ",
+        "on-click": "alacritty -e bash -ci htop --sort-key PERCENT_CPU"
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "{used:0.2f} / {total:0.0f} GB",
+        "on-click": "alacritty -e bash -ci htop --sort-key PERCENT_MEM"
+    },
+
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "Disconnected ⚠"
+
+    },
+
+    "custom/vpn":{
+        "format": "wg0 {icon}",
+        "tooltip-format": "{icon}",
+        "exec": "~/.config/waybar/modules/vpn",
+        "return-type": "json",
+        "interval": 5,
+        "format-icons": ["",""]
+    },
+
+    "pulseaudio": {
+        "tooltip": false,
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click-right": "pavucontrol",
+        "on-click-middle": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+
+    "custom/kbd": {
+        "format": "{}",
+        //"format-alt": "{alt}: {}",
+        //"format-alt-click": "click-left",
+        "return-type": "json",
+        "exec": "$HOME/.config/waybar/modules/kbd_indicator"
+    },
+
+    "custom/covid": {
+        "exec": "~/bin/covid_waybar -c 'Austria' -L -D -N",
+        "exec-on-event": false,
+        "return-type": "json",
+        "interval": 300,
+        "format": "{} {icon}",
+        "format-icons": [""],
+        //"exec-if": "ping covid.ourworldindata.org -c1",
+        //"on-click-right": "alacritty -e bash -i ~/bin/covid_status -c 'Austria' -L -D -N -f gplotpdf",
+        "on-click-right": "alacritty -e bash -i ~/bin/covid_longformat -c 'Austria' -L -D -N -l",
+        "on-click": "~/bin/covid_dbus -c 'Austria' -L -D -N -d"
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        //"format-alt": "{alt}: {}",
+        //"format-alt-click": "click-left",
+        "interval": 300,
+        "return-type": "json",
+        "exec": "curl -s 'https://wttr.in/?format=1' |jq --unbuffered --compact-output -M -R '{text:.}'",
+        "exec-if": "ping wttr.in -c1",
+        "on-click-right": "kitty --start-as fullscreen bash -ci ~/bin/wttr"
+        // "on-click-right": "alacritty -e bash -ci ~/bin/wttr"
+    }
+}
+

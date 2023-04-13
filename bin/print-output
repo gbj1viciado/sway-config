@@ -1,0 +1,10 @@
+#!/bin/bash
+grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+
+cat $(find /home/gabriel/Imagens -name *grim.png) | wl-copy
+
+rm $(find /home/gabriel/Imagens -name *grim.png)
+
+
+
+exit

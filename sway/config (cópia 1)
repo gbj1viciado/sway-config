@@ -1,0 +1,766 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+font pango: Noto Mono Regular 14
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu wofi --show=run --lines=5 --prompt=""
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/gabriel/Imagens/'Crown-Abstract-Wallpaper Without Logo.png' fill
+#output DVI-D-1 bg /home/gabriel/Imagens/'KDE Plasma Scenery 64 NO LOGO.png' fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+
+output HDMI-A-1 resolution 1920x1080 position 0,1080
+output DVI-D-1 resolution 1920x1080 position 0,0
+
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+
+##output HDMI-A-1 scale 1.2
+
+
+
+### Idle configuration
+#
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -i /home/gabriel/Imagens/418263.jpg' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -i /home/gabriel/Imagens/418263.jpg'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+
+
+ exec swayidle -w \
+          timeout 900 'swaylock -f -i /home/gabriel/Imagens/418263.jpg' \
+          timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          before-sleep 'swaylock -f -i /home/gabriel/Imagens/418263.jpg'
+
+
+#exec source .profile
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+input * {
+    xkb_layout "br"
+}
+
+input <identifier> xkb_model "pc101"
+input * xkb_numlock enable
+
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill ed window
+    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
+
+    # Start your launcher
+    bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move ed container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your  with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current  fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current  between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap  between the tiling area and the floating area
+    bindsym $mod+space  mode_toggle
+
+    # Move  to the parent container
+    bindsym $mod+a  parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently ed window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the ed scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+#bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioPlay exec play-pause.sh
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86Calculator exec --no-startup-id gnome-calculator
+
+#####################################################################################################################
+#################                          how to exit, logoff, suspend, ...                        #################
+#####################################################################################################################
+
+#Backup exit
+#Press ctrl+alt+x - check toolbar for next choices
+bindsym control+mod1+X exec dm-logout1
+
+
+
+# ArcoLinux Logout
+#bindsym $mod+Shift+e exec --no-startup-id arcolinux-logout
+#bindsym $mod+X exec --no-startup-id swaylock -i /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
+bindsym $mod+X exec --no-startup-id swaylock -i /home/gabriel/Imagens/Illustrated-Celestial-Landscape-28.png
+
+#####################################################################################################################
+#################                          moving around workspaces                                 #################
+#####################################################################################################################
+
+
+# next/previous workspace
+
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+bindsym $mod+Tab workspace back_and_forth
+
+#navigate workspaces next / previous
+bindsym Mod1+Ctrl+Right workspace next
+bindsym Mod1+Ctrl+Left workspace prev
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+#####################################################################################################################
+#################                          3 menu's in arcolinux                                     #################
+#####################################################################################################################
+
+# start dmenu
+bindsym $mod+shift+d exec --no-startup-id dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+
+# gmrun
+bindsym mod1+F2 exec --no-startup-id gmrun
+
+# start xfce-appfinder
+bindsym mod1+F3 exec nwg-drawer
+
+
+# start rofi full
+bindsym $mod+F11 exec --no-startup-id rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command  "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} {cmd}" -show-icons -fullscreen -font "Noto Sans 13"
+
+# start rofi small
+bindsym $mod+F12 exec wofi -I --show=drun --lines=20 --prompt="" 
+
+#####################################################################################################################
+#################                          applications keyboard shortcuts                          #################
+#####################################################################################################################
+#bindsym mod1+f1 exec rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command  "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} {cmd}" -show-icons
+#keeepassxc
+bindsym control+mod1+k exec flatpak run org.keepassxc.KeePassXC
+#discord
+bindsym control+mod1+d exec com.discordapp.Discord 
+
+# press $mod+shift+p to pass all keys to the underlying application 
+# (eg wayvnc vncviewer ...)
+mode passthrough {
+	bindsym $mod+shift+p mode default
+}
+bindsym $mod+shift+p mode passthrough
+
+
+
+
+# terminal
+#bindsym $mod+Return exec --no-startup-id termite
+bindsym $mod+KP_Enter exec --no-startup-id termite
+bindsym control+mod1+t exec --no-startup-id terminator 
+bindsym control+mod1+Return exec --no-startup-id termite 
+bindsym control+mod1+KP_Enter exec --no-startup-id termite 
+#bindsym F12 exec --no-startup-id guake
+
+# Enables inhibit_idle when playing audio
+exec sway-audio-idle-inhibit
+
+#System monitor
+bindsym control+Shift+Escape exec --no-startup-id xfce4-taskmanager
+
+#settings
+bindsym control+mod1+m exec --no-startup-id xfce4-settings-manager
+
+#catfish
+bindsym control+mod1+c exec --no-startup-id catfish
+
+#arcolinux-logout
+#bindsym control+mod1+k exec --no-startup-id arcolinux-logout
+#bindsym control+mod1+l exec --no-startup-id arcolinux-logout
+
+#rofi theme selector
+bindsym control+mod1+r exec --no-startup-id rofi-theme-selector
+
+#arcolinux conflict
+#bindsym $mod+m exec --no-startup-id pragha
+
+#htop
+#arcolinux conflict
+#bindsym $mod+h exec --no-startup-id htop
+
+#pavucontrol
+#arcolinux conflict
+bindsym control+mod1+u exec --no-startup-id pavucontrol
+
+# start xfce-appfinder
+#arcolinux does not seem to work
+bindsym control+mod1+a exec --no-startup-id nwg-drawer
+
+#clipboard-manager
+bindsym $mod+Escape exec clipman pick -t wofi
+bindsym $mod+Shift+Escape exec rm /home/gabriel/.local/share/clipman.json && rm /home/gabriel/.local/share/clipman-primary.json
+
+#pamac-manager
+bindsym control+mod1+p exec --no-startup-id pamac-manager
+
+#xkill
+bindsym --release $mod+Escape exec xkill
+
+#workspace related
+
+#workspace 1 related
+#bindsym $mod+F1 exec --no-startup-id exo-open --launch webbrowser
+#qwerty/azerty conflict with w
+#bindsym $mod+w exec --no-startup-id exo-open --launch webbrowser
+bindsym control+mod1+f exec firefox
+bindsym control+Shift+f exec firefox --private-window
+bindsym control+mod1+v exec --no-startup-id vivaldi-stable
+bindsym control+mod1+g exec brave
+bindsym control+Shift+g exec brave --incognito
+bindsym $mod+F1 exec brave
+workspace 1 output HDMI-A-1
+
+#workspace 2 related
+#bindsym $mod+F2 exec --no-startup-id geany
+bindsym $mod+F2 exec  xed
+workspace 2 output DVI-D-1
+
+
+#workspace 3 related
+bindsym $mod+F3 exec --no-startup-id rhythmbox
+
+#workspace 4 related
+bindsym $mod+F4 exec --no-startup-id lutris
+workspace 4 output HDMI-A-1
+
+#workspace 5 related
+bindsym $mod+F5 exec --no-startup-id steam
+bindsym control+mod1+i exec --no-startup-id nitrogen
+workspace 5 output DVI-D-1
+
+#workspace 6 related
+bindsym $mod+F6 exec celluloid
+workspace 6 output HDMI-A-1
+
+#workspace 7 related
+bindsym $mod+F7 exec --no-startup-id virt-manager
+
+#workspace 8 related
+#for_window [app_id="thunar"] 
+bindsym $mod+F8 exec --no-startup-id thunar
+bindsym $mod+Shift+Return exec --no-startup-id thunar
+bindsym $mod+Shift+KP_Enter exec --no-startup-id thunar
+bindsym control+mod1+b exec --no-startup-id thunar
+
+#workspace 9 related
+bindsym $mod+F9 exec --no-startup-id thunderbird
+#bindsym $mod+F9 exec --no-startup-id geary
+#bindsym control+mod1+e exec --no-startup-id geary
+
+#workspace 10 related
+workspace 10 output DVI-D-1
+bindsym $mod+F10 exec flatpak run com.spotify.Client 
+bindsym control+mod1+s exec flameshot gui
+workspace 10 output DVI-D-1
+
+
+#scrennshooter
+bindsym Print exec --no-startup-id grim -g "$(slurp)" - | wl-copy
+bindsym mod1+Print exec print-window
+bindsym ctrl+Print exec print-output
+bindsym shift+Print exec grim - | wl-copy
+
+#####################################################################################################################
+#################                          assign applications to workspaces                       #################
+#####################################################################################################################
+
+# Assign application to start on a specific workspace
+# you can find the class with the program xprop
+
+# Workspace 1 browser related
+#assign [class="Firefox|Vivaldi-stable|Vivaldi-snapshot|Opera"]                      → 1
+#assign [class="Chromium|Google-chrome"]                                             → 1
+
+# Workspace 2 text editor related
+#assign [class="sublime-text|sublime_text|Sublime_text|subl|Subl|subl3|Subl3"]       → 2
+#assign [class="Xed|xed|Brackets|Atom|Code|Geany"]                                   → 2
+
+# Workspace 3 Inkscape
+#assign [class="Inkscape"]                                                           → 3
+
+# Workspace 4 Gimp
+assign [class="Lutris|lutris"]                                                               → 4
+for_window [app_id="lutris"] move to workspace 4
+
+# Workspace 5 Images and meld
+assign [class="steam|Steam"]             → 5
+#assign [class="feh|gthumb|Gthumb|eog|Eog|Pinta|pixeluvo|Pixeluvo"]                  → 5
+#assign [class="Steam"]                                                               → 5
+
+# Workspace 6 all video related software
+assign [class="gamescope|Gamescope"]                                                            → 6
+
+
+# Workspace 7 virtual machines and settings
+#assign [class="Vmplayer|VirtualBox"]						    → 7
+
+# Workspace 8 file managers
+#assign [class="Nemo|thunar|Caja|thunar|thunar"]                                 → 8
+
+# Workspace 9 email clients
+assign [class="Thunderbird|thunderbird"]                                                    → 9
+
+# Workspace 10 music related
+assign [class="Spotify|spotify"]                                                    → 10
+assign [class="rhythmbox|Rhythmbox"]                                                    → 10
+#fix for spotify not moving to workspace 10
+for_window [app_id="rhythmbox"] move to workspace 10
+for_window [app_id="Spotify"] move to workspace 10
+
+
+
+
+#####################################################################################################################
+############################################GTK Theme################################################################
+exec_always import-gsettings
+
+#####################################################################################################################
+#################                                 system applications                               #################
+#####################################################################################################################
+
+#exec --no-startup-id xfce4-power-manager &
+# ommitted next line to get super key to bring up the menu in xfce and avoid error then in i3
+# IF xfsettingsd is activated you can not change themes
+#exec --no-startup-id xfsettingsd &
+#exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
+#exec mako 
+exec swaync
+#####################################################################################################################
+#################                          border control                                           #################
+#####################################################################################################################
+
+
+# Border control
+hide_edge_borders both
+bindsym $mod+shift+b exec --no-startup-id i3-msg border toggle
+
+#changing border style
+#super+t in arcolinux is starting terminal
+bindsym $mod+t border normal
+bindsym $mod+y border 1pixel
+bindsym $mod+u border none
+
+
+#new_window pixel 1
+default_border none
+#new_window none
+
+#new_float pixel 1
+default_floating_border normal
+#new_float none
+
+#####################################################################################################################
+#################                          Popups  control                                          #################
+#####################################################################################################################
+
+#Popups during fullscreen mode
+popup_during_fullscreen smart
+
+
+
+
+#####################################################################################################################
+#################                          i3 gaps next                                             #################
+#####################################################################################################################
+
+# Settings for I3 next gap git
+# https://github.com/Airblader/i3/tree/gaps-next
+# delete or uncomment the following lines if you do not have it or do not
+# want it
+
+
+for_window [app_id="^.*"] border pixel 2
+#for_window [class="firefox|Firefox"] border pixel 0
+gaps inner 5
+gaps outer 5
+#smart_gaps on
+#smart_borders on
+
+
+
+
+
+#####################################################################################################################
+#################                          i3 gaps change                                           #################
+#####################################################################################################################
+
+
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+#####################################################################################################################
+#################                          floating or tiled                                        #################
+#####################################################################################################################
+
+
+
+#floating enabled from some programs - find with xprop
+#for_window [title=".*"] mode default
+#for_window [shell=".*"] mode default
+#for_window [title="WayVNC - TigerVNC"] mode passthrough
+for_window [shell=".*"] inhibit_idle fullscreen
+for_window [title="About Mozilla Firefox"] floating enable
+for_window [title="Firefox - Indicador de compartilhamento"] floating enable
+#for_window [title="The Classic PW"] floating enable  
+for_window [title="Select file"] floating enable
+for_window [title="Select folder"] floating enable
+for_window [title="Selecionar arquivo"] floating enable
+for_window [title="Create or select new Steam library folder:"] floating enable
+for_window [title="Progresso da operação de arquivo"] floating enable
+for_window [title="Progresso da operação de arquivo"] inhibit_idle
+for_window [title="Picture-in-Picture"] floating enable
+for_window [title="Picture-in-picture"] floating enable
+for_window [title="Sobre o Mozilla Firefox"] floating enable
+for_window [app_id="blueman-manager"] floating enable
+#for_window [app_id="gamescope"] floating enable
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="Kodi"] fullscreen enable
+for_window [app_id="yad"] floating enable
+for_window [app_id="Arcolinux-welcome-app.py"] floating enable
+#for_window [app_id="Arcolinux-tweak-tool.py"] floating enable
+#for_window [app_id="Guake"] floating enable
+for_window [app_id="bleachbit"] floating disable
+for_window [app_id="gmrun"] floating enable
+for_window [app_id="Picture-in-Picture"] floating enable
+for_window [app_id="blueberry.py"] floating enable
+for_window [app_id="brasero"] floating disable
+for_window [app_id="galculator"] floating enable
+for_window [app_id="org.gnome.Calculator"] floating enable
+for_window [app_id="GTA5.exe"] floating enable
+for_window [app_id="GTA5"] floating enable
+for_window [app_id="Launcher.exe"] floating enable
+for_window [app_id="gnome-disks"] floating disable
+for_window [app_id="^gnome-font-viewer$"] floating enable
+for_window [app_id="^gpick$"] floating enable
+for_window [app_id="hexchat"] floating disable
+for_window [app_id="imagewriter"] floating enable
+for_window [app_id="font-manager"] floating enable
+#for_window [app_id="qt5ct|Lxappearance] floating enable
+for_window [app_id="nitrogen"] floating disable
+for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="peek"] floating enable
+for_window [app_id="^skype$"] floating enable
+for_window [app_id="^spotify$"] floating disable
+for_window [app_id="system-config-printer.py"] floating enable
+for_window [app_id="unetbootin.elf"] floating enable
+for_window [app_id="usb-creator-gtk"] floating enable
+for_window [app_id="^vlc$"] floating disable
+for_window [app_id="wine"] floating disable
+for_window [app_id="xfburn"] floating disable
+for_window [app_id="xfce4-appfinder"] floating enable
+for_window [app_id="xfce4-settings-manager"] floating disable
+for_window [app_id="xfce4-taskmanager"] floating enable
+#for_window [app_id="virtualBoxVM"] floating enable
+
+
+#for_window [instance="gimp"] floating disable
+for_window [instance="script-fu"] border normal
+for_window [instance="variety"] floating disable
+
+
+for_window [title="Copying"] floating enable
+for_window [title="Deleting"] floating enable
+for_window [title="Moving"] floating enable
+for_window [title="^Terminator Preferences$"] floating enable
+
+
+#for_window [window_role="^gimp-toolbox-color-dialog$"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="^Preferences$"] floating enable
+for_window [window_role="setup"] floating enable
+
+
+####################################################################
+
+##AutoStart
+#####
+
+exec autotiling
+exec nwg-dock -d -o HDMI-A-1X
+
+#Enable passthrough mode to disable keyboard shorcuts.
+#exec suscribe
+#exec Ella-app-mode
+
+#keyboard
+#exec --no-startup-id setxkbmap br 
+
+#Auto lock on login
+#exec swaylock -i /home/gabriel/Imagens/'Illustrated-Celestial-Landscape-28.png'
+
+# Authentication dialog
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec export DISPLAY=:0
+exec dbus-update-activation-environment --systemd DISPLAY
+exec xrandr --output XWAYLAND0 --primary
+
+#nmcli
+
+exec nm-applet --indicator
+
+# Updater
+exec --no-startup-id pamac-tray
+
+# bluetooth
+exec --no-startup-id blueman-applet
+
+#variety
+#exec --no-startup-id variety
+
+# volume
+#exec --no-startup-id pasystray
+#exec --no-startup-id volumeicon
+
+# num lock activated
+#exec_always --no-startup-id numlockx on
+
+# clipman
+#exec wl-paste -t text --watch clipman store
+exec wl-paste -t text --watch clipman store -P
+exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+#exec wl-clipboard-history -t
+
+# keepassxc
+exec --no-startup-id flatpak run org.keepassxc.KeePassXC
+
+# kdeconnect
+exec --no-startup-id kdeconnect-indicator
+
+# light locker
+#exec --no-startup-id light-locker
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {   
+    swaybar_command waybar
+        
+    }
+}
+
+    ##START THEMING WM
+    #Theme name : ArcoLinux Default
+
+    # Window color settings
+    # class                 border  backgr. text    indicator
+    client.focused          #08A19D #08A19D #e5e5e5 #08A19D
+    client.unfocused        #212732 #212732 #aaaaaa #222222
+    client.focused_inactive #212732 #212732 #a9a9a9 #222222
+    client.placeholder      #212732 #212732 #aaaaaa #222222
+    client.urgent           #d42121 #d42121 #f7f7f7 #d42121
+
+    client.background       #242424
+
+    ##STOP THEMING WM
+
+include /etc/sway/config.d/*

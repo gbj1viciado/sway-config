@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if swaymsg -t get_tree | grep 'WayVNC - TigerVNC' > /dev/null; then
+   swaymsg mode passthrough
+else
+   swaymsg mode default
+    fi

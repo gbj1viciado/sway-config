@@ -1,0 +1,7 @@
+address=0.0.0.0
+enable_auth=true
+username=gabriel
+password=gbj1032
+private_key_file=/home/gabriel/.config/wayvnc/key.pem
+certificate_file=/home/gabriel/.config/wayvnc/cert.pem
+

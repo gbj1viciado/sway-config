@@ -1,0 +1,11 @@
+#!/bin/bash
+grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')"   
+
+
+cat $(find /home/gabriel/Imagens -name *grim.png) | wl-copy
+
+rm $(find /home/gabriel/Imagens -name *grim.png)
+
+
+
+exit
