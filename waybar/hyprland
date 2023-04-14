@@ -14,7 +14,7 @@
         "custom/weather",
         "wlr/workspaces"
     ],
-    "modules-center": ["hyprland/window"],
+    //"modules-center": ["hyprland/window"],
     "modules-right": [
         "custom/playerctl-title",
         "custom/playerctl-back",

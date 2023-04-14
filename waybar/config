@@ -15,7 +15,7 @@
         "sway/mode",
         "sway/workspaces"
     ],
-    "modules-center": ["sway/window"],
+    //"modules-center": ["sway/window"],
     "modules-right": [
         "custom/playerctl-title",
         "custom/playerctl-back",
