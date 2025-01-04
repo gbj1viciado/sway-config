@@ -7,7 +7,7 @@
 font pango: Noto Mono Regular 14
 
 
-seat seat0 xcursor_theme Catppuccin-Mocha-Dark-Cursors 29
+seat seat0 xcursor_theme Breeze
 
 ### Variables
 #
@@ -38,7 +38,7 @@ output "*" bg /home/gabriel/Imagens/'waves_upscayl_4x_realesrgan-x4plus-anime.jp
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 
 
-output DP-3 adaptive_sync on resolution 1920x1080@144.001Hz position 0,1080
+output DP-1 adaptive_sync on resolution 1920x1080@144.001Hz position 0,1080
 output HDMI-A-1 resolution 1920x1080 position 0,0
 #output DVI-D-1 resolution 1920x1080 position 0,0
 
@@ -305,7 +305,7 @@ bindsym $mod+F12 exec wofi -I --show=drun --lines=20 --prompt=""
 #####################################################################################################################
 #bindsym mod1+f1 exec rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command  "{terminal} {ssh-client} {host} [-p {port}]" -run-shell-command "{terminal} {cmd}" -show-icons
 #keeepassxc
-bindsym control+mod1+k exec flatpak run org.keepassxc.KeePassXC
+bindsym control+mod1+k exec keepassxc
 #discord
 bindsym control+mod1+d exec com.discordapp.Discord 
 
@@ -379,11 +379,12 @@ bindsym control+mod1+p exec --no-startup-id pamac-manager
 #bindsym $mod+w exec --no-startup-id exo-open --launch webbrowser
 bindsym control+mod1+f exec firefox
 bindsym control+Shift+f exec firefox --private-window
+bindsym control+Shift+n exec firefox --profile /home/gabriel/.mozilla/firefox/j17iq4y7.Naughy/
 bindsym control+mod1+v exec --no-startup-id vivaldi-stable
-bindsym control+mod1+g exec flatpak run com.brave.Browser
-bindsym control+Shift+g exec flatpak run com.brave.Browser --incognito
-bindsym $mod+F1 exec flatpak run com.brave.Browser
-workspace 1 output DP-3
+bindsym control+mod1+g exec brave
+bindsym control+Shift+g exec brave --incognito
+bindsym $mod+F1 exec firefox
+workspace 1 output DP-1
 
 #workspace 2 related
 #bindsym $mod+F2 exec --no-startup-id geany
@@ -396,7 +397,7 @@ bindsym $mod+F3 exec --no-startup-id rhythmbox
 
 #workspace 4 related
 bindsym $mod+F4 exec --no-startup-id lutris
-workspace 4 output DP-3
+workspace 4 output DP-1
 
 #workspace 5 related
 bindsym $mod+F5 exec --no-startup-id steam
@@ -405,7 +406,7 @@ workspace 5 output HDMI-A-1
 
 #workspace 6 related
 bindsym $mod+F6 exec celluloid
-workspace 6 output DP-3
+workspace 6 output DP-1
 
 #workspace 7 related
 bindsym $mod+F7 exec --no-startup-id virt-manager
@@ -424,7 +425,8 @@ bindsym $mod+F9 exec --no-startup-id thunderbird
 
 #workspace 10 related
 workspace 10 output HDMI-A-1
-bindsym $mod+F10 exec flatpak run com.spotify.Client 
+#bindsym $mod+F10 exec flatpak run com.spotify.Client 
+bindsym $mod+F10 exec youtube-music
 bindsym control+mod1+s exec flameshot gui
 workspace 10 output HDMI-A-1
 
@@ -481,7 +483,10 @@ assign [class="rhythmbox|Rhythmbox"]                                            
 #fix for spotify not moving to workspace 10
 for_window [app_id="rhythmbox"] move to workspace 10
 for_window [app_id="Spotify"] move to workspace 10
+for_window [app_id="YouTube Music"] move to workspace 10
+for_window [app_id="com.github.th_ch.youtube_music"] move to workspace 10
 for_window [class="Spotify"] move to workspace 10
+for_window [class="Youtube-Music"] move to workspace 10
 
 
 
@@ -630,6 +635,7 @@ for_window [app_id="nm-connection-editor"] floating enable
 for_window [app_id="Kodi"] fullscreen enable
 for_window [app_id="yad"] floating enable
 for_window [app_id="gnome-system-monitor"] floating enable
+for_window [app_id="org.gnome.SystemMonitor"] floating enable
 for_window [app_id="Arcolinux-welcome-app.py"] floating enable
 #for_window [app_id="Arcolinux-tweak-tool.py"] floating enable
 #for_window [app_id="Guake"] floating enable
@@ -683,14 +689,14 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="^Preferences$"] floating enable
 for_window [window_role="setup"] floating enable
 
-
+for_window [shell="xwayland"] title_format "[XWayland] %title"
 ####################################################################
 
 ##AutoStart
 #####
 
 exec autotiling
-exec nwg-dock -d -o DP-3
+exec nwg-dock -d -o DP-1
 
 #Enable passthrough mode to disable keyboard shorcuts.
 #exec suscribe
@@ -735,7 +741,7 @@ exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/cli
 #exec wl-clipboard-history -t
 
 # keepassxc
-exec --no-startup-id flatpak run org.keepassxc.KeePassXC
+exec --no-startup-id keepassxc
 
 # kdeconnect
 exec --no-startup-id kdeconnect-indicator
@@ -772,3 +778,4 @@ bar {
     ##STOP THEMING WM
 
 include /etc/sway/config.d/*
+

@@ -68,7 +68,7 @@
     "custom/updates": {
         "exec": "(paru -Qua) | wc -l",
         "interval": 7200,
-        "format": " {}"
+        "format": " {}"
     },
     // "custom/language": {
     //     "exec": "cat /tmp/kb_layout",
@@ -94,21 +94,21 @@
 
 	"custom/playerctl-back": {
 		"format": "",
-        "on-click": "playerctl --player=spotify previous",
+        "on-click": "playerctl previous",
         "on-click-right": "pavucontrol",
 
     },
 
 	"custom/playerctl-pause": {
 		"format": "",
-        "on-click": "playerctl --player=spotify pause",
+        "on-click": "playerctl pause",
         "on-click-right": "pavucontrol",
 
     },
 
 	"custom/playerctl-next": {
 		"format": "",
-        "on-click": "playerctl --player=spotify next",
+        "on-click": "playerctl next",
         "on-click-right": "pavucontrol",
 
     },
@@ -120,9 +120,9 @@
         //"format-alt": "{alt}: {}",
         //"format-alt-click": "click-left",       
         "return-type": "bash",
-        "exec": "/home/gabriel/.config/waybar/player-spotify.sh",
-        "on-click": "playerctl --player=spotify pause",
-        "on-click-right": "playerctl --player=spotify play",
+        "exec": "/home/gabriel/.config/waybar/player.sh",
+        "on-click": "playerctl pause",
+        "on-click-right": "playerctl play",
         "interval": 2,
 
     },
@@ -152,7 +152,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{: %R   %d/%m}",
+
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "on-click-right": "gsimplecal"
     },
@@ -179,8 +179,8 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "tooltip": false,
-        "format-source": " {volume}%",
-        "format-source-muted": " Muted",
+        "format-source": " {volume}%",
+        "format-source-muted": " Muted",
         "on-click": "pamixer --default-source -t",
         "on-scroll-up": "pamixer --default-source -i 1",
         "on-scroll-down": "pamixer --default-source -d 1",
