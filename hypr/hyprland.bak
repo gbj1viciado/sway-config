@@ -40,9 +40,7 @@ workspace=5,monitor:HDMI-A-1
 # ██▄ █░█ ██▄ █▄▄
 
 #IDLE
-#exec-once = swayidle timeout 900 'swaylock -F --screenshots --effect-blur 10x5 --clock --indicator' timeout 1800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
-
-exec-once = hypridle
+exec-once = swayidle timeout 900 'swaylock -F --screenshots --effect-blur 10x5 --clock --indicator' timeout 1800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
 
 #
 
@@ -172,12 +170,30 @@ animations {
 
 
 
+dwindle {
+    # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+    pseudotile = yes # master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+    preserve_split = yes # you probably want this
+    no_gaps_when_only = false
+}
+
+master {
+    # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+    no_gaps_when_only = false
+    new_is_master = true
+
+}
 
 gestures {
     # See https://wiki.hyprland.org/Configuring/Variables/ for more
     workspace_swipe = off
 }
 
+# Example per-device config
+# See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
+device:epic mouse V1 {
+    sensitivity = -0.5
+}
 
 # █░█░█ █ █▄░█ █▀▄ █▀█ █░█░█   █▀█ █░█ █░░ █▀▀ █▀
 # ▀▄▀▄▀ █ █░▀█ █▄▀ █▄█ ▀▄▀▄▀   █▀▄ █▄█ █▄▄ ██▄ ▄█
@@ -216,7 +232,6 @@ windowrulev2 = float,class:^(org.gnome.Calculator)$,title:^(Calculadora)$
    # start spotify tiled in ws10
     windowrulev2 = tile, class:^(Spotify)$
     windowrulev2 = workspace 10 silent, class:^(Spotify)$
-    windowrulev2 = workspace 10 silent, class:^(com.github.th_ch.youtube_music)$
    # start steam tiled in ws5
     windowrulev2 = workspace 5 silent, class:^(Steam)$
     windowrulev2 = workspace 5 silent, class:^(steam)$
@@ -247,17 +262,6 @@ windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a win
 #windowrule = maximize,title:^(Firefox)(.*)$
 
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-
-
-#### SMART GAPS
-
-workspace = w[tv1], gapsout:0, gapsin:0
-workspace = f[1], gapsout:0, gapsin:0
-windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
-
 
 # █▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄
 # █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀
@@ -302,13 +306,11 @@ bind = $mainMod, F6, exec, celluloid
 bind = $mainMod, F7, exec, virt-manager 
 bind = $mainMod, F8, exec, thunar
 bind = $mainMod, F9, exec, thunderbird
-#bind = $mainMod, F10, exec, flatpak run com.spotify.Client 
-bind = $mainMod, F10, exec, youtube-music
+bind = $mainMod, F10, exec, flatpak run com.spotify.Client 
 #bind = $mainMod, F11, exec, flatpak run com.spotify.Client 
 bind = $mainMod, F12, exec, wofi -I --show=drun --lines=20 --prompt="" 
 bind = ALT,F3,exec,nwg-drawer
 bind = CTRL ALT,F,exec,firefox
-bind = CTRL SHIFT,N,exec,firefox --profile /home/gabriel/.mozilla/firefox/j17iq4y7.Naughy/
 bind = CTRL ALT,K,exec,flatpak run org.keepassxc.KeePassXC
 bind = CTRL ALT,U,exec,pavucontrol
 bind = CTRL ALT,D,exec,flatpak run com.discordapp.Discord 
@@ -384,11 +386,8 @@ binde=, XF86Calculator, exec, gnome-calculator
 
 #LOCK
 
-#bind = $mainMod,X,exec, swaylock --screenshots --effect-blur 7x5 --clock --indicator-idle-visible --fade-in 0.5 --ring-color 464653 
+bind = $mainMod,X,exec, swaylock --screenshots --effect-blur 7x5 --clock --indicator-idle-visible --fade-in 0.5 --ring-color 464653 
 #LAYOUT
-
-bind = $mainMod, X, exec, hyprlock
-
 
 bind=SUPER,63,layoutmsg,cyclenext
 
