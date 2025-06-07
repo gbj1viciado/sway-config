@@ -131,7 +131,7 @@
     </keybind>
     <keybind key="C-S-n">
       <action name="Execute">
-        <command>firefox --profile /home/gabriel/.mozilla/firefox/j17iq4y7.Naughy/</command>
+        <command>brave --profile-directory="Naughy"</command>
       </action>
     </keybind>
     <keybind key="W-S-r">
@@ -274,7 +274,7 @@
     </keybind>
     <keybind key="W-F2">
       <action name="Execute">
-        <command>xed</command>
+        <command>kate</command>
       </action>
     </keybind>
     <keybind key="W-F3">

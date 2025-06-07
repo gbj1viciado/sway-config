@@ -1,5 +1,5 @@
 profile docked {
-	output HDMI-A-1  mode 1920x1080 scale 1 position 0,1080
-	output DVI-D-1 mode 1920x1080 scale 1 position 0,0
+	output HDMI-A-3  mode 1920x1080 scale 1 position 0,0
+	output DP-2 adaptive_sync on mode 1920x1080 scale 1 position 0,1080
 }
 

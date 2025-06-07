@@ -35,18 +35,18 @@ output "*" bg /home/gabriel/Imagens/'waves_upscayl_4x_realesrgan-x4plus-anime.jp
 #
 # Example configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#   output HDMI-A-3 resolution 1920x1080 position 1920,0
 
 
-output DP-1 adaptive_sync on resolution 1920x1080@144.001Hz position 0,1080
-output HDMI-A-1 resolution 1920x1080 position 0,0
+output DP-2 adaptive_sync off resolution 1920x1080@144.001Hz position 0,1080
+output HDMI-A-3 resolution 1920x1080 position 0,0
 #output DVI-D-1 resolution 1920x1080 position 0,0
 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 
-##output HDMI-A-1 scale 1.2
+##output HDMI-A-3 scale 1.2
 
 
 
@@ -379,17 +379,18 @@ bindsym control+mod1+p exec --no-startup-id pamac-manager
 #bindsym $mod+w exec --no-startup-id exo-open --launch webbrowser
 bindsym control+mod1+f exec firefox
 bindsym control+Shift+f exec firefox --private-window
-bindsym control+Shift+n exec firefox --profile /home/gabriel/.mozilla/firefox/j17iq4y7.Naughy/
+#bindsym control+Shift+n exec firefox --profile /home/gabriel/.mozilla/firefox/j17iq4y7.Naughy/
+bindsym control+Shift+n exec brave --profile-directory="Naughy"
 bindsym control+mod1+v exec --no-startup-id vivaldi-stable
 bindsym control+mod1+g exec brave
 bindsym control+Shift+g exec brave --incognito
 bindsym $mod+F1 exec firefox
-workspace 1 output DP-1
+workspace 1 output DP-2
 
 #workspace 2 related
 #bindsym $mod+F2 exec --no-startup-id geany
-bindsym $mod+F2 exec  xed
-workspace 2 output HDMI-A-1
+bindsym $mod+F2 exec  kate
+workspace 2 output HDMI-A-3
 
 
 #workspace 3 related
@@ -397,16 +398,16 @@ bindsym $mod+F3 exec --no-startup-id rhythmbox
 
 #workspace 4 related
 bindsym $mod+F4 exec --no-startup-id lutris
-workspace 4 output DP-1
+workspace 4 output DP-2
 
 #workspace 5 related
 bindsym $mod+F5 exec --no-startup-id steam
 bindsym control+mod1+i exec --no-startup-id nitrogen
-workspace 5 output HDMI-A-1
+workspace 5 output HDMI-A-3
 
 #workspace 6 related
-bindsym $mod+F6 exec celluloid
-workspace 6 output DP-1
+bindsym $mod+F6 exec vlc
+workspace 6 output DP-2
 
 #workspace 7 related
 bindsym $mod+F7 exec --no-startup-id virt-manager
@@ -424,11 +425,11 @@ bindsym $mod+F9 exec --no-startup-id thunderbird
 #bindsym control+mod1+e exec --no-startup-id geary
 
 #workspace 10 related
-workspace 10 output HDMI-A-1
+workspace 10 output HDMI-A-3
 #bindsym $mod+F10 exec flatpak run com.spotify.Client 
 bindsym $mod+F10 exec youtube-music
 bindsym control+mod1+s exec flameshot gui
-workspace 10 output HDMI-A-1
+workspace 10 output HDMI-A-3
 
 
 #scrennshooter
@@ -696,7 +697,7 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 #####
 
 exec autotiling
-exec nwg-dock -d -o DP-1
+exec nwg-dock -d -o DP-2
 
 #Enable passthrough mode to disable keyboard shorcuts.
 #exec suscribe
